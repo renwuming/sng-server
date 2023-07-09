@@ -11,11 +11,9 @@ const IS_DEV = process.env.NODE_ENV === "DEV";
 // mongodb
 const dbStr = IS_DEV
   ? "mongodb://localhost/sng"
-  : "mongodb://rwuser:RSYDX-wlcgj1024@192.168.0.247:8635,192.168.0.87:8635/puzzle?authSource=admin";
+  : "mongodb://rwuser:RSYDX-wlcgj1024@192.168.0.247:8635,192.168.0.87:8635/sng?authSource=admin&replSet=true";
 const mongoose = require("mongoose");
-global.mongoose = mongoose.connect(dbStr, {
-  useNewUrlParser: true,
-});
+global.mongoose = mongoose.connect(dbStr, { useUnifiedTopology: true });
 global.db = mongoose.connection;
 
 const index = require("./routes/index");
